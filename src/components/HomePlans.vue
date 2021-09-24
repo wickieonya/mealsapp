@@ -4,7 +4,7 @@
       <v-flex class="xs:text-center display-1 font-weight-black my-5">Available Meal Plans</v-flex>
     </v-layout>
     <v-layout row wrap>
-      <v-flex class="py-4">
+      <v-flex xs12 sm12 md4 class="py-4 px-2">
         <v-card>
           <v-img src="http://source.unsplash.com/hjCA3ecCXAQ" height="500px">
             <v-container fluid>
@@ -19,13 +19,20 @@
           <v-card-title>
             <div>
               <h3 class="headline mb-0">Keto</h3>
-              <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus amet aut consequuntur delectus ea, iste iusto nisi pariatur, porro provident reiciendis soluta tenetur voluptatibus! Deserunt doloremque fuga nesciunt. Necessitatibus, qui.</div>
+              <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus amet aut consequuntur delectus
+                ea, iste iusto nisi pariatur, porro provident reiciendis soluta tenetur voluptatibus! Deserunt
+                doloremque fuga nesciunt. Necessitatibus, qui.x
+              </div>
             </div>
           </v-card-title>
+
+          <v-card-actions v-if="['menu'].includes($route.name)">
+            <v-btn outlined block color="green" @click="showRecipes('keto')">Select This Plan</v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
 
-      <v-flex class="py-4">
+      <v-flex xs12 sm12 md4 class="py-4 px-2">
         <v-card>
           <v-img src="http://source.unsplash.com/6S27S6pZ6o0" height="500px">
             <v-container fluid>
@@ -39,13 +46,20 @@
           <v-card-title>
             <div>
               <h3 class="headline mb-0">Paleo</h3>
-              <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid asperiores commodi delectus in laborum maiores, obcaecati reiciendis veniam voluptates. Ab amet dolor excepturi iste maiores minus mollitia porro sint!</div>
+              <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid asperiores commodi delectus in
+                laborum maiores, obcaecati reiciendis veniam voluptates. Ab amet dolor excepturi iste maiores minus
+                mollitia porro sint!
+              </div>
             </div>
           </v-card-title>
+
+          <v-card-actions v-if="['menu'].includes($route.name)">
+            <v-btn outlined block color="green" @click="showRecipes('paleo')">Select This Plan</v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
 
-      <v-flex class="py-4">
+      <v-flex xs12 sm12 md4 class="py-4 px-2">
         <v-card>
           <v-img src="http://source.unsplash.com/1SPu0KT-Ejg" height="500px">
             <v-container fluid>
@@ -59,10 +73,15 @@
           <v-card-title>
             <div>
               <h3 class="headline mb-0">Vegan</h3>
-              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mauris felis, varius rutrum massa a, dignissim ornare dui. Cras eget velit eu dui tristique lobortis sit amet vel tellus.
+              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mauris felis, varius rutrum massa a,
+                dignissim ornare dui. Cras eget velit eu dui tristique lobortis sit amet vel tellus.
               </div>
             </div>
           </v-card-title>
+
+          <v-card-actions v-if="['menu'].includes($route.name)">
+            <v-btn outlined block color="green" @click="showRecipes('vegan')">Select This Plan</v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
 

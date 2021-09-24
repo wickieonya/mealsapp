@@ -11,11 +11,20 @@
     <v-app-bar app color="brown darken-4" dark>
       <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer class="hidden-md-and-up"></v-spacer>
-      <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
-      <v-btn light class="hidden-sm-and-down mx-2">Menu</v-btn>
+      <router-link to="/">
+        <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
+      </router-link>
+      <router-link to="/menu">
+        <v-btn light class="hidden-sm-and-down mx-2">Menu</v-btn>
+      </router-link>
+
       <v-spacer class="hidden-sm-and-down"></v-spacer>
+      <router-link to="/sign-in">
       <v-btn light class="hidden-sm-and-down mx-2">SIGN IN</v-btn>
-      <v-btn color="brown lighten-3" class="hidden-sm-and-down mx-2">JOIN</v-btn>
+      </router-link>
+      <router-link to="/join">
+        <v-btn color="brown lighten-3" class="hidden-sm-and-down mx-2">JOIN</v-btn>
+      </router-link>
     </v-app-bar>
   </span>
 </template>
@@ -38,5 +47,8 @@ export default {
 </script>
 
 <style scoped>
-
+a {
+  text-decoration: none;
+  color: white;
+}
 </style>
