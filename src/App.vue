@@ -1,7 +1,7 @@
 <template>
   <v-app>
+    <app-navigation/>
     <v-main transition="slide-x-transition">
-      <AppNavigation/>
       <router-view></router-view>
     </v-main>
   </v-app>
