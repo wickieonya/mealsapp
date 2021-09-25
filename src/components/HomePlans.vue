@@ -91,7 +91,17 @@
 
 <script>
 export default {
-  name: "HomePlans"
+  name: "HomePlans",
+  data() {
+    return {
+      recipes: []
+    }
+  },
+  methods: {
+    showRecipes(plan) {
+      this.$store.dispatch('getRecipes', plan);
+    }
+  }
 }
 </script>
 
