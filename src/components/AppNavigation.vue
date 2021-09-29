@@ -28,8 +28,11 @@
           <v-btn color="brown lighten-3" class="hidden-sm-and-down mx-2">JOIN</v-btn>
         </router-link>
       </div>
+      <div v-else>
+        <v-btn to="/about" class="mx-3" color="secondary">PROFILE</v-btn>
+        <v-btn outlined color="white" @click="logout">Logout</v-btn>
+      </div>
 
-      <v-btn v-else outlined color="white" @click="logout">Logout</v-btn>
     </v-app-bar>
   </span>
 </template>

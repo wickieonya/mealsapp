@@ -4,7 +4,8 @@ import axios from "axios";
 import router from "@/router";
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import {database} from "@/firebase";
-import {collection, getDocs, addDoc} from "firebase/firestore";
+import {collection, getDocs, setDoc, addDoc, doc} from "firebase/firestore";
+import {uid} from 'uid';
 
 
 Vue.use(Vuex)
@@ -13,18 +14,24 @@ export default new Vuex.Store({
     state: {
         recipes: [],
         apiUrl: 'https://api.edamam.com/search',
-        user: null,
+        user: JSON.parse(localStorage.getItem('user')) || null,
         isAuthenticated: false,
+        userRecipes: JSON.parse(localStorage.getItem("recipes")) || [],
     },
     mutations: {
         setRecipes(state, payload) {
-            state.recipes = payload
+            state.recipes = payload;
         },
         setUser(state, payload) {
-            state.user = payload
+            state.user = payload;
+            localStorage.setItem('user', JSON.stringify(payload));
         },
         setIsAuthenticated(state, payload) {
-            state.isAuthenticated = payload
+            state.isAuthenticated = payload;
+        },
+        setUserRecipes(state, payload) {
+            state.userRecipes = payload;
+            localStorage.setItem('recipes', JSON.stringify(payload));
         }
     },
     actions: {
@@ -90,15 +97,24 @@ export default new Vuex.Store({
                 })
         },
 
-        async addRecipe({state}, payload) {
-            const recipe = payload.recipe
-            try {
-                await addDoc(collection(database, "recipes"), {
-                    ...recipe,
-                });
-            } catch (e) {
-                console.log('error adding document', e);
+        async addRecipe({state, commit}, payload) {
+            const [uid, id] = [uid, state.user.user.uid]
+            const data = {
+                label: payload.recipe.label,
+                id: id,
             }
+            await addDoc(collection(database, "recipes"), data)
+                .catch(e => console.log("Error adding document: ", e));
+        },
+
+        async getUserRecipes({state, commit}) {
+            const querySnapshot = await getDocs(collection(database, "recipes"));
+            const recipes = [];
+            querySnapshot.forEach(doc => {
+                recipes.push(doc.data());
+            })
+
+            commit('setUserRecipes', recipes);
         }
 
     },
