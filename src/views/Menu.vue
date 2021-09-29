@@ -1,6 +1,7 @@
 <template>
   <v-container fluid>
     <home-plans/>
+    <v-divider></v-divider>
     <meal-recipes/>
   </v-container>
 </template>
