@@ -86,8 +86,13 @@ export default new Vuex.Store({
             const auth = getAuth();
             signOut(auth)
                 .then(() => {
-                    commit('setUser', null)
-                    commit('setIsAuthenticated', false)
+                    // remove user and recipes
+                    commit('setUser', null);
+                    commit('setIsAuthenticated', false);
+                    localStorage.removeItem("user");
+                    localStorage.removeItem("recipes");
+
+                    // navigate home
                     router.push('/')
                 })
                 .catch(() => {
