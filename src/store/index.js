@@ -2,7 +2,15 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from "axios";
 import router from "@/router";
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    sendEmailVerification,
+    updatePassword,
+    sendPasswordResetEmail,
+} from "firebase/auth";
 import {database} from "@/firebase";
 import {collection, getDocs, setDoc, addDoc, doc} from "firebase/firestore";
 import {uid} from 'uid';
@@ -59,6 +67,7 @@ export default new Vuex.Store({
                     commit('setUser', user)
                     commit('setIsAuthenticated', true)
                     router.push('/about')
+                    sendEmailVerification(auth.currentUser);
                 })
                 .catch(() => {
                     commit('setUser', null)
@@ -100,6 +109,22 @@ export default new Vuex.Store({
                     commit("setIsAuthenticated", false)
                     router.push("/")
                 })
+        },
+
+        setUserPassword({commit}, {password}) {
+            const auth = getAuth();
+            const user = auth.currentUser;
+
+            updatePassword(user, password)
+                .then(() => {
+                    // password updated
+                })
+                .catch(e => console.log('error updating password', e));
+        },
+
+        requestPasswordReset({commit}, email) {
+            const auth = getAuth();
+            sendPasswordResetEmail(auth, email);
         },
 
         async addRecipe({state, commit}, payload) {

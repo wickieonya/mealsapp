@@ -8,14 +8,16 @@
         </v-list-item-content>
       </v-list-item>
     </v-navigation-drawer>
-    <v-app-bar app color="brown darken-4" dark>
+    <v-app-bar app color="brown lighten-1" dark>
       <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-spacer class="hidden-md-and-up"></v-spacer>
       <router-link to="/">
-        <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
+        <v-toolbar-title class="text--white" style="color: white">{{ appTitle }}</v-toolbar-title>
       </router-link>
+
+      <v-spacer class="hidden-md-and-up"></v-spacer>
+
       <router-link to="/menu">
-        <v-btn light class="hidden-sm-and-down mx-2">Menu</v-btn>
+        <v-btn light class="hidden-sm-and-down mx-2" rounded color="green" style="color: white">Menu</v-btn>
       </router-link>
 
       <v-spacer class="hidden-sm-and-down"></v-spacer>
@@ -29,8 +31,14 @@
         </router-link>
       </div>
       <div v-else>
-        <v-btn to="/about" class="mx-3" color="secondary">PROFILE</v-btn>
-        <v-btn outlined color="white" @click="logout">Logout</v-btn>
+        <v-btn to="/about" class="mx-3" color="secondary">
+          <v-icon class="mr-1">mdi-account</v-icon>
+          PROFILE
+        </v-btn>
+        <v-btn outlined color="white" @click="logout">
+          <v-icon class="mr-1">mdi-logout-variant</v-icon>
+           Logout
+        </v-btn>
       </div>
 
     </v-app-bar>

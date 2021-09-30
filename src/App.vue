@@ -3,8 +3,8 @@
     <app-navigation/>
     <v-main transition="slide-x-transition">
       <router-view></router-view>
+      <app-footer/>
     </v-main>
-    <app-footer/>
   </v-app>
 </template>
 
@@ -16,6 +16,9 @@ import AppFooter from "@/components/AppFooter";
 export default {
   name: 'App',
   components: {AppFooter, AppNavigation},
+  mounted() {
+    document.title = "Meal Prep App";
+  },
   data: () => ({
     //
   }),
