@@ -116,7 +116,9 @@ export default new Vuex.Store({
             const querySnapshot = await getDocs(collection(database, "recipes"));
             const recipes = [];
             querySnapshot.forEach(doc => {
-                recipes.push(doc.data());
+                if (doc.data().id === state.user.user.uid) {
+                    recipes.push(doc.data());
+                }
             })
 
             commit('setUserRecipes', recipes);
