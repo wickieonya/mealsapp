@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md4>
+      <v-flex xs12 sm8 md4 lg3>
         <v-card class="elevation-12">
           <v-toolbar dark color="primary">
             <v-toolbar-title>Sign In Form</v-toolbar-title>
@@ -15,8 +15,19 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
+            <v-dialog v-model="dialog">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                    v-bind="attrs"
+                    v-on="on"
+                >
+                  Forgot Password
+                </v-btn>
+              </template>
+              <ForgotPasswordForm/>
+            </v-dialog>
             <v-spacer></v-spacer>
-            <v-btn color="primary" :disabled="!valid" @click="submit">Join</v-btn>
+            <v-btn color="primary" :disabled="!valid" @click="submit">Sign In</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -25,10 +36,14 @@
 </template>
 
 <script>
+import ForgotPasswordForm from "@/components/ForgotPasswordForm";
+
 export default {
   name: "SignIn",
+  components: {ForgotPasswordForm,},
   data() {
     return {
+      dialog: false,
       valid: false,
       email: '',
       password: '',
@@ -50,7 +65,7 @@ export default {
         this.$store.dispatch('userLogin', {
           email: this.email,
           password: this.password
-        })
+        });
       }
     }
   }
